@@ -111,8 +111,14 @@ file is invalid, then raise an error."
           (package-recipe--validate recipe name)
           (while (and (setq key (pop plist))
                       (setq val (pop plist)))
-            (unless (eq key :fetcher)
+            (unless (or (eq key :fetcher)
+                        ;; Also handle :url differently to expand
+                        (eq key :url))
               (push val args)
+              (push key args))
+            (when (eq key :url)
+              ;; Expand :url using the local-melpa as the base
+              (push (expand-file-name val package-build--melpa-base) args)
               (push key args)))
           (apply (intern (format "package-%s-recipe" fetcher))
                  name :name name args))
