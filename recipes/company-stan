@@ -1,0 +1,10 @@
+(company-stan
+ ;; https://github.com/melpa/melpa#recipe-format
+ :fetcher git
+ ;; The locally modified version of `package-recipe-lookup'
+ ;; can handle a path relative to `local-melpa'.
+ ;; The :url should be the overall stan-mode git repo directory.
+ ;; The :files should be specified relative to the repo.
+ :url ".."
+ :files ("company-stan/*.el"
+         (:exclude "company-stan/test-*.el")))
