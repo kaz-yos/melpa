@@ -133,4 +133,20 @@ sandbox: packages/archive-contents
 
 
 .PHONY: clean build index html json sandbox
+
+
+# GNU Make 4.7 Rules without Recipes or Prerequisites
+# https://www.gnu.org/software/make/manual/html_node/Force-Targets.html
+# If a rule has no prerequisites or recipe, and the target of the rule
+# is a nonexistent file, then make imagines this target to have been
+# updated whenever its rule is run. This implies that all targets
+# depending on this one will always have their recipe run.
+# An example will illustrate this:
+#   clean: FORCE
+#           rm $(objects)
+#   FORCE:
+# Here the target ‘FORCE’ satisfies the special conditions, so the
+# target clean that depends on it is forced to run its recipe. There is
+# nothing special about the name ‘FORCE’, but that is one name commonly
+# used this way.
 .FORCE:
