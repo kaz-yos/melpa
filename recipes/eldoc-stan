@@ -1,0 +1,11 @@
+(eldoc-stan
+ ;; https://github.com/melpa/melpa#recipe-format
+ :fetcher git
+ ;; The locally modified version of `package-recipe-lookup'
+ ;; can handle a path relative to `local-melpa'.
+ ;; The :url should be the overall stan-mode git repo directory.
+ ;; The :files should be specified relative to the repo.
+ :url ".."
+ :files ("eldoc-stan/*.el"
+	 "eldoc-stan/eldoc-stan.json"
+         (:exclude "eldoc-stan/test-*.el")))
