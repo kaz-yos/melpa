@@ -1,0 +1,16 @@
+(ac-stan
+ ;; https://github.com/melpa/melpa#recipe-format
+ :fetcher git
+ ;; The locally modified version of `package-recipe-lookup'
+ ;; can handle a path relative to `local-melpa'.
+ ;; The :url should be the overall stan-mode git repo directory.
+ ;; The :files should be specified relative to the repo.
+ :url ".."
+ ;; https://github.com/melpa/melpa#example-multiple-files-in-multiple-directories
+ ;; Notice that specifying an entry in `:files` that is a list takes the
+ ;; first element to be the destination directory.
+ :files ("ac-stan/*.el"
+         ;; stan-mode file will be under the ac-dict folder.
+         ;; ac-stan-VERSION/ac-dict/stan-mode
+	 ("ac-dict" "ac-stan/ac-dict/stan-mode")
+         (:exclude "ac-stan/test-*.el")))
