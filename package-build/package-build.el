@@ -275,10 +275,15 @@ is used instead."
       (setq rev (or (oref rcp commit)
                     (concat "origin/"
                             (or (oref rcp branch)
-                                (ignore-errors
-                                  (package-build--run-process-match
-                                   "HEAD branch: \\(.*\\)" dir
-                                   "git" "remote" "show" "origin"))
+                                (let ((branch-name (ignore-errors
+                                                     (package-build--run-process-match
+                                                      "HEAD branch: \\(.*\\)" dir
+                                                      "git" "remote" "show" "origin"))))
+                                  ;; Do not allow (unknown) pass as a branch name.
+                                  ;; HEAD branch: (unknonw) was encountered in
+                                  ;; a pull request: https://github.com/stan-dev/stan-mode/pull/58
+                                  (unless (string-equal branch-name "(unknown)")
+                                    branch-name))
                                 "master")))))
     (package-build--run-process dir nil "git" "reset" "--hard" rev)
     (package-build--run-process dir nil "git" "submodule" "sync" "--recursive")
