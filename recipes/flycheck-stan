@@ -8,4 +8,5 @@
  :url ".."
  :files ("flycheck-stan/*.el"
 	 "flycheck-stan/error_msgs.txt"
-         (:exclude "flycheck-stan/test-*.el")))
+         (:exclude "flycheck-stan/test-*.el"
+                   "flycheck-stan/flycheck-stan-error-msgs.el")))
