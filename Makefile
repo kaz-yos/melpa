@@ -25,10 +25,13 @@ LISP_CONFIG ?= '(progn\
   (setq package-build-write-melpa-badge-images t)\
   (setq package-build-timeout-secs (when (string= "linux" (symbol-name system-type)) 600)))'
 
+# This path can only be a single path, not a list of paths.
 LOAD_PATH ?= $(TOP)/package-build
 
+# addprefix cannot handle spaces
+# https://www.gnu.org/software/make/manual/html_node/File-Name-Functions.html
 EVAL := $(EMACS_COMMAND) --no-site-file --batch \
-$(addprefix -L ,$(LOAD_PATH)) \
+-L '$(LOAD_PATH)' \
 --eval $(LISP_CONFIG) \
 --load package-build.el \
 --eval
